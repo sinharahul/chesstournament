@@ -1,11 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-player1:
-  id: 1
-  name: Player1
-  rating: 1
+one:
+  name: MyString
+  rounds: 1
 
-player2:
-  id: 2
-  name: Player2
-  rating: 1
+two:
+  name: MyString
+  rounds: 1

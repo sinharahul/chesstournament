@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161102002503) do
+ActiveRecord::Schema.define(version: 20161106002441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,9 +22,50 @@ ActiveRecord::Schema.define(version: 20161102002503) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "matches", force: :cascade do |t|
+    t.integer  "result"
+    t.integer  "player_id"
+    t.integer  "other_player_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["other_player_id"], name: "index_matches_on_other_player_id", using: :btree
+    t.index ["player_id"], name: "index_matches_on_player_id", using: :btree
+  end
+
+  create_table "matches_players", id: false, force: :cascade do |t|
+    t.integer "player_id"
+    t.integer "match_id"
+    t.index ["match_id"], name: "index_matches_players_on_match_id", using: :btree
+    t.index ["player_id"], name: "index_matches_players_on_player_id", using: :btree
+  end
+
+  create_table "player_matches", id: false, force: :cascade do |t|
+    t.integer "player_id"
+    t.integer "match_id"
+    t.index ["match_id"], name: "index_player_matches_on_match_id", using: :btree
+    t.index ["player_id"], name: "index_player_matches_on_player_id", using: :btree
+  end
+
   create_table "players", force: :cascade do |t|
     t.string   "name"
     t.integer  "rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rounds", force: :cascade do |t|
+    t.integer  "round_number"
+    t.integer  "tournament_id"
+    t.integer  "match_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["match_id"], name: "index_rounds_on_match_id", using: :btree
+    t.index ["tournament_id"], name: "index_rounds_on_tournament_id", using: :btree
+  end
+
+  create_table "tournaments", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "rounds"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -46,4 +87,7 @@ ActiveRecord::Schema.define(version: 20161102002503) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "matches", "players"
+  add_foreign_key "rounds", "matches"
+  add_foreign_key "rounds", "tournaments"
 end
