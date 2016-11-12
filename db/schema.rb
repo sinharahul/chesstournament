@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161106002441) do
+ActiveRecord::Schema.define(version: 20161110190452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,13 @@ ActiveRecord::Schema.define(version: 20161106002441) do
     t.index ["player_id"], name: "index_matches_players_on_player_id", using: :btree
   end
 
+  create_table "matches_rounds", id: false, force: :cascade do |t|
+    t.integer "round_id"
+    t.integer "match_id"
+    t.index ["match_id"], name: "index_matches_rounds_on_match_id", using: :btree
+    t.index ["round_id"], name: "index_matches_rounds_on_round_id", using: :btree
+  end
+
   create_table "player_matches", id: false, force: :cascade do |t|
     t.integer "player_id"
     t.integer "match_id"
@@ -63,11 +70,18 @@ ActiveRecord::Schema.define(version: 20161106002441) do
     t.index ["tournament_id"], name: "index_rounds_on_tournament_id", using: :btree
   end
 
+  create_table "rounds_matches", id: false, force: :cascade do |t|
+    t.integer "round_id"
+    t.integer "match_id"
+    t.index ["match_id"], name: "index_rounds_matches_on_match_id", using: :btree
+    t.index ["round_id"], name: "index_rounds_matches_on_round_id", using: :btree
+  end
+
   create_table "tournaments", force: :cascade do |t|
     t.string   "name"
-    t.integer  "rounds"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "no_of_rounds"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "users", force: :cascade do |t|

@@ -17,10 +17,27 @@
   </div>
 
   <div class="field">
-    <%= f.label :rounds %>
-    <%= f.number_field :rounds %>
+    <%= f.label :no_of_rounds %>
+    <%= f.number_field :no_of_rounds %>
   </div>
+  <h4>Players List</h1>
+ <%= link_to 'New Player', new_player_path %>
+<table class="table-striped table">
+  <tr>
+    <th>Player</th>
+    <th>Rating</th>
+    <th> </th>
+  </tr>
 
+  <% @players.each do |player| %>
+    <tr>
+       <%= fields_for "players[]", player do |pf| %>
+          <td><%= pf.text_field :name %></td>
+         <td><%= pf.text_field :rating %></td>
+       <% end %>
+    </tr>
+  <% end %>
+</table>
   <div class="actions">
     <%= f.submit %>
   </div>

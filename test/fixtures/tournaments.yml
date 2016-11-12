@@ -2,8 +2,8 @@
 
 one:
   name: MyString
-  rounds: 1
+  no_of_rounds: 1
 
 two:
   name: MyString
-  rounds: 1
+  no_of_rounds: 1

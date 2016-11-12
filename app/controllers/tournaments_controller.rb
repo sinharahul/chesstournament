@@ -15,6 +15,7 @@ class TournamentsController < ApplicationController
   # GET /tournaments/new
   def new
     @tournament = Tournament.new
+    @players=Player.all
   end
 
   # GET /tournaments/1/edit
@@ -24,8 +25,12 @@ class TournamentsController < ApplicationController
   # POST /tournaments
   # POST /tournaments.json
   def create
+    puts "In create #{params[:players]}"
+    @players=params[:players]
+    puts @players.length
+    process1(@players)
     @tournament = Tournament.new(tournament_params)
-
+    puts "#{params}"
     respond_to do |format|
       if @tournament.save
         format.html { redirect_to @tournament, notice: 'Tournament was successfully created.' }
@@ -36,7 +41,20 @@ class TournamentsController < ApplicationController
       end
     end
   end
-
+  def process1(players)
+     playerArray=[]
+     puts players.length
+     players.each do |key, array|
+       puts "#{key}-----"
+       puts array[:name],array[:rating]
+       p=Player.find(key)
+       p.name=array[:name]
+       p.rating=array[:rating]
+       p.save
+       puts p
+       playerArray << p
+     end
+  end
   # PATCH/PUT /tournaments/1
   # PATCH/PUT /tournaments/1.json
   def update
@@ -69,6 +87,6 @@ class TournamentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tournament_params
-      params.require(:tournament).permit(:name, :rounds)
+      params.require(:tournament).permit(:name, :no_of_rounds,:players)
     end
 end
