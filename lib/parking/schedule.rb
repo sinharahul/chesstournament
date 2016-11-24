@@ -1,4 +1,7 @@
-class Player
+=begin
+
+=end
+class PlayerModel
   attr_accessor :name,:rating
   def initialize(name,rating)
     @name=name
@@ -13,9 +16,9 @@ class Player
   
 end
 
-class Match
-  attr_accessor :player1,:player2
-  def initialize(player1,player2,play1score,play2score)
+class MatchModel
+  attr_accessor :player1,:player2,:round
+  def initialize(player1,player2,play1score,play2score,round)
     @player1=player1
     @player2=player2
     @play1score=play1score
@@ -28,10 +31,10 @@ class Match
     
   end
   def to_s
-    "Match"+player1.to_s+" "+player2.to_s
+    "MatchModel"+player1.to_s+" "+player2.to_s+" "+round.to_s
   end  
 end  
-class Tournament
+class TournamentModel
   attr_accessor :players,:rounds,:matches
   def initialize(players,rounds)
     @players=players
@@ -40,28 +43,39 @@ class Tournament
   end
   def schedule
     count=@players.length
-    matches=[]
+     @players.sort_by!{|p| -p.rating}
+     @players.each{|player| p player }
+    rmmatches={}
     if count % 2==0
        1.upto(@rounds)do |round|
-         puts "Scheduling #{round}" 
-         pair(round)       
+         m=pair(round)
+         rmmatches[round]=m
        end
     else
      puts "Number of players need to be even"
     end
-  end 
+    rmmatches
+  end
   def pair(round)
+
+     tplayers=[]
+     roundmatches=[]
     0.upto(@players.length-1)do|i|
       p1=@players[i]
-      1.upto(@players.length-1)do|j|
+       0.upto(@players.length-1)do|j|
         p2=@players[j]
-         match=Match.new(p1,p2,0,0)
-         puts match
-        if not(p1 == p2) &&  !@matches.include?(match)
+        match=MatchModel.new(p1,p2,0,0,round)
+        if not(p1 == p2) &&  !@matches.include?(match) &&  !tplayers.include?(p1) &&  !tplayers.include?(p2)
            @matches << match
-           next
-        end  
-      end  
+           roundmatches << match
+           tplayers << p1
+           tplayers << p2
+           puts "Round:#{round} #{match.player1.name} V #{match.player2.name}"
+        end
+      end
+
+
     end
+    roundmatches
   end
 end

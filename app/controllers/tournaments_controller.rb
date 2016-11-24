@@ -1,3 +1,4 @@
+require 'parking/parking'
 class TournamentsController < ApplicationController
   before_action :set_tournament, only: [:show, :edit, :update, :destroy]
 
@@ -26,10 +27,15 @@ class TournamentsController < ApplicationController
   # POST /tournaments.json
   def create
     puts "In create #{params[:players]}"
+    puts "In create #{params[:no_of_rounds]}"
     @players=params[:players]
+    @rounds=params[:tournament][:no_of_rounds].to_i
     puts @players.length
-    process1(@players)
+    puts "rounds=#{@rounds}"
     @tournament = Tournament.new(tournament_params)
+    parking=Parking.new
+    parking.process1(@players,@rounds)
+
     puts "#{params}"
     respond_to do |format|
       if @tournament.save
@@ -41,20 +47,7 @@ class TournamentsController < ApplicationController
       end
     end
   end
-  def process1(players)
-     playerArray=[]
-     puts players.length
-     players.each do |key, array|
-       puts "#{key}-----"
-       puts array[:name],array[:rating]
-       p=Player.find(key)
-       p.name=array[:name]
-       p.rating=array[:rating]
-       p.save
-       puts p
-       playerArray << p
-     end
-  end
+
   # PATCH/PUT /tournaments/1
   # PATCH/PUT /tournaments/1.json
   def update
