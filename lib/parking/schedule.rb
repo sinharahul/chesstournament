@@ -41,6 +41,48 @@ class TournamentModel
     @rounds=rounds
     @matches=[]
   end
+  def schedule1
+     @matches=getmatches
+     p @matches.length
+     matchesperround=@players.length/2
+     p matchesperround
+     allcombinations=@matches.combination(matchesperround).to_a
+     p allcombinations.first
+     p uniquematches(allcombinations).length
+  end
+  def uniquematches(allcombinations)
+     result=allcombinations.select do |elem|
+        parray=[]
+        elem.each do |e|
+           parray << e.player1
+           parray << e.player2
+        end
+        #p "parray=#{parray}"
+        punique=parray.uniq
+        #p "punique=#{punique}"
+        parray.length==punique.length
+     end
+     result
+  end
+  def getmatches
+    count=@players.length
+    @players.sort_by!{|p| -p.rating}
+    #@players.each{|player| p player }
+    matches=[]
+    0.upto(@players.length-1)do|i|
+       p1=@players[i]
+
+       0.upto(@players.length-1)do|j|
+           p2=@players[j]
+           match=MatchModel.new(p1,p2,0,0,0)
+           if not(p1 == p2) &&   !matches.include?(match)
+              matches << match
+              #puts " #{match.player1.name} V #{match.player2.name}"
+           end
+       end
+    end
+    matches
+  end
   def schedule
     count=@players.length
      @players.sort_by!{|p| -p.rating}
@@ -56,6 +98,7 @@ class TournamentModel
     end
     rmmatches
   end
+
   def pair(round)
 
      tplayers=[]
