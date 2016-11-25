@@ -47,6 +47,7 @@ class TournamentModel
   3)filter out all groupings that contain the same player more than once
 =end
   def schedule1
+      rmmatches={}
      @matches=getmatches
      p @matches.length
      matchesperround=@players.length/2
@@ -57,8 +58,13 @@ class TournamentModel
      p @matches.length
       @matches=@matches.sort_by!{|m| (rank(m))}
       @matches=getunique(@matches)
-     p @matches.slice(0,@rounds)
-
+     @matches=@matches.slice(0,@rounds)
+     count=1
+     @matches.each do|m|
+       rmmatches[count]=m
+       count=count+1
+     end
+     rmmatches
   end
   def getunique(matches)
     result=[]

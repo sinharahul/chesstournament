@@ -34,7 +34,7 @@ class TournamentsController < ApplicationController
     puts "rounds=#{@rounds}"
     @tournament = Tournament.new(tournament_params)
     parking=Parking.new
-    parking.process1(@players,@rounds)
+    parking.process1(@players,@rounds,@tournament)
 
     puts "#{params}"
     respond_to do |format|

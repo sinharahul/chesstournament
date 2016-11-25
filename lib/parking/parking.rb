@@ -1,6 +1,6 @@
 require 'parking/schedule'
 class Parking
- def process1(players,rounds)
+ def process1(players,rounds,tournament)
       playerArray=[]
       puts players.length
       players.each do |key, array|
@@ -13,8 +13,30 @@ class Parking
         puts p
         playerArray << p
       end
-      convert(playerArray,rounds)
+      matches=convert(playerArray,rounds)
+      save(matches,tournament)
       return playerArray
+ end
+ def save(matches,tournament)
+  matches.each do |round, marray|
+    puts "#{round}-----"
+    puts marray
+    saveround(round,marray,tournament)
+  end
+ end
+ def saveround(round,marray,tournament)
+    round=Round.new({round_number:round})
+    round.tournament=tournament
+
+   marray.each do|match|
+     player1=Player.find_by name:match.player1.name
+     player2=Player.find_by name:match.player2.name
+     match=Match.new
+     match.players << player1
+     match.players << player2
+     round.matches << match
+   end
+   round.save
  end
  def convert(players,rounds)
     playermodels=[]
@@ -27,6 +49,6 @@ class Parking
     puts "First round Matches=#{matches[1]}"
     puts "Second round Matches=#{matches[2]}"
     puts "Third round Matches=#{matches[3]}"
-
+    matches
  end
 end
