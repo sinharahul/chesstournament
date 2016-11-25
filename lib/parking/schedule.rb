@@ -41,6 +41,11 @@ class TournamentModel
     @rounds=rounds
     @matches=[]
   end
+=begin
+  1)get all possible combinations of matches
+  2)find all grouping of no_of_players/2(assuming even)
+  3)filter out all groupings that contain the same player more than once
+=end
   def schedule1
      @matches=getmatches
      p @matches.length
@@ -48,7 +53,39 @@ class TournamentModel
      p matchesperround
      allcombinations=@matches.combination(matchesperround).to_a
      p allcombinations.first
-     p uniquematches(allcombinations).length
+     @matches=uniquematches(allcombinations)
+     p @matches.length
+      @matches=@matches.sort_by!{|m| (rank(m))}
+      @matches=getunique(@matches)
+     p @matches.slice(0,@rounds)
+
+  end
+  def getunique(matches)
+    result=[]
+    marray=[]
+
+    matches.each do |m|
+      flag=true
+      marray.each do |ma|
+        if m.include?(ma)
+         flag=false
+        end
+      end
+
+      if flag
+        result << m
+        m.each{|m1| marray << m1}
+      end
+    end
+    result
+  end
+  def rank(matches)
+    sum=0
+    matches.each do |m|
+      sum=sum+(m.player1.rating-m.player2.rating).abs
+    end
+    p "Sum=#{sum}"
+    sum
   end
   def uniquematches(allcombinations)
      result=allcombinations.select do |elem|
