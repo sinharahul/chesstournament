@@ -12,3 +12,24 @@
 
 <%= link_to 'Edit', edit_tournament_path(@tournament) %> |
 <%= link_to 'Back', tournaments_path %>
+
+ <% @tour.rounds.each do |round| %>
+ <table class="table-striped table">
+   <thead>
+     <tr>
+       <th>Round:<%=round.round_number %></th>
+     </tr>
+   </thead>
+  <tbody>
+    <% round.matches.each do |match|%>
+    <%  players=match.players   %>
+      <tr>
+        <td><%= players[0].name %>(<%=players[0].rating %>)</td>
+        <td><bold>V</bold></td>
+          <td><%= players[1].name %>(<%=players[1].rating %>)</td>
+
+      </tr>
+    <%end%>
+  </tbody>
+ <% end %>
+</table>
