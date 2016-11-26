@@ -1,6 +1,6 @@
 class CreateTournaments < ActiveRecord::Migration[5.0]
   def change
-    create_table do |t|
+    create_table :tournaments do |t|
 
       t.string :name
       t.integer :rounds
