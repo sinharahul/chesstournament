@@ -22,7 +22,7 @@
   </div>
   <h4>Players List</h1>
  <%= link_to 'New Player', new_player_path %>
-<table class="table-striped table">
+<table id="playertable",class="table-striped table">
   <tr>
     <th>Player</th>
     <th>Rating</th>
@@ -40,5 +40,13 @@
 </table>
   <div class="actions">
     <%= f.submit %>
+    <%= button_tag(id:'addplayer1',name:'addplayer',type: 'button') do
+       content_tag(:normal, 'Add Player')
+     end
+    %>
+    <%= button_tag(id:'removeplayer1',type: 'button') do
+           content_tag(:normal, 'Remove Player')
+         end
+        %>
   </div>
 <% end %>

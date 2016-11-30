@@ -41,26 +41,83 @@ class TournamentModel
     @rounds=rounds
     @matches=[]
   end
+ def initialize()
+  end
+
+  def schedule2
+    #arrange players in a hash rating=>[players]
+    playershash=arrangeplayers
+    p "playershash=#{playershash.sort.to_h}"
+    sortedhash=playershash.sort.to_h
+    matches=[]
+    iter=100000
+    n=@players.length/2
+    #1.upto(@rounds) do |round|
+    while matches.length < n*@rounds do
+        p "In round #{@round}"
+        roundplayers=@players
+        1.upto(n)do |i|
+          flag=false
+          count=0
+          while flag==false do
+            rp1=roundplayers.sample
+            rp2=roundplayers.sample
+            if rp1==nil || rp2==nil
+                p "Resetting"
+                roundplayers=@players
+                matches=[]
+                flag=true
+            end
+            match=MatchModel.new(rp1,rp2,0,0,0)
+            if !matches.include?(match)
+               flag=true
+               matches << match
+               roundplayers.delete(rp1)
+               roundplayers.delete(rp2)
+            end
+            count=count+1
+
+          end
+        end
+    end
+    # for i = 1 to number of rounds
+    #choose player from highest rating , choose a random player from array
+    #if already played choose from next rating category
+    #
+  end
+  def arrangeplayers
+    h={}
+    @players.each do |player|
+        if h[player.rating]==nil
+            h[player.rating]=[player]
+        else
+           harray=h[player.rating]
+           harray << player
+        end
+    end
+    h
+  end
 =begin
   1)get all possible combinations of matches
   2)find all grouping of no_of_players/2(assuming even)
   3)filter out all groupings that contain the same player more than once
 =end
-  def schedule1
+  def schedule1(players,rounds)
       rmmatches={}
-     @matches=getmatches
-     p @matches.length
-     matchesperround=@players.length/2
-     p matchesperround
-     allcombinations=@matches.combination(matchesperround).to_a
-     p allcombinations.first
-     @matches=uniquematches(allcombinations)
-     p @matches.length
-      @matches=@matches.sort_by!{|m| (rank(m))}
-      @matches=getunique(@matches)
-     @matches=@matches.slice(0,@rounds)
+      matches=getmatches(players)
+
+     p "matches length=#{matches.length}"
+     matchesperround=players.length/2
+     p "matchesperround=#{matchesperround}"
+     allcombinations=matches.combination(matchesperround).to_a
+     p "allcombinations.first=#{allcombinations.first}"
+     matches=uniquematches(allcombinations)
+     p matches.length
+      matches=matches.sort_by!{|m| (rank(m))}
+      matches=getunique(matches)
+     matches=matches.slice(0,rounds)
      count=1
-     @matches.each do|m|
+     matches.each do|m|
        rmmatches[count]=m
        count=count+1
      end
@@ -90,7 +147,7 @@ class TournamentModel
     matches.each do |m|
       sum=sum+(m.player1.rating-m.player2.rating).abs
     end
-    p "Sum=#{sum}"
+     p "Sum=#{sum}"
     sum
   end
   def uniquematches(allcombinations)
@@ -107,20 +164,20 @@ class TournamentModel
      end
      result
   end
-  def getmatches
-    count=@players.length
-    @players.sort_by!{|p| -p.rating}
-    #@players.each{|player| p player }
+  def getmatches(players)
+    count=players.length
+    players.sort_by!{|p| -p.rating}
+    #players.each{|player| p player }
     matches=[]
-    0.upto(@players.length-1)do|i|
-       p1=@players[i]
+    0.upto(players.length-1)do|i|
+       p1=players[i]
 
-       0.upto(@players.length-1)do|j|
-           p2=@players[j]
+       (i+1).upto(players.length-1)do|j|
+           p2=players[j]
            match=MatchModel.new(p1,p2,0,0,0)
            if not(p1 == p2) &&   !matches.include?(match)
               matches << match
-              #puts " #{match.player1.name} V #{match.player2.name}"
+              puts " #{match.player1.name} V #{match.player2.name}"
            end
        end
     end

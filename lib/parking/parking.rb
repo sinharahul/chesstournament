@@ -4,14 +4,27 @@ class Parking
       playerArray=[]
       puts players.length
       players.each do |key, array|
-        puts "#{key}-----"
+        puts "key=#{key}-----"
         puts array[:name],array[:rating]
-        p=Player.find(key)
-        p.name=array[:name]
-        p.rating=array[:rating]
-        p.save
-        puts p
-        playerArray << p
+        p=Player.find_by(id:key)
+        #byebug
+        if p==nil
+          puts "Creating new player"
+          p=Player.new
+          p.name=array[:name]
+          p.rating=array[:rating]
+          p.id=key
+          puts "Creating new player #{p.name} #{p.rating}"
+          p.save
+        else
+            puts "Find by key #{p}"
+            p.name=array[:name]
+            p.rating=array[:rating]
+            p.save
+            puts p
+
+         end
+         playerArray << p
       end
       matches=convert(playerArray,rounds)
       save(matches,tournament)

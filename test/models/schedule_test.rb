@@ -3,8 +3,8 @@ require 'parking/schedule'
 class ScheduleTest < ActiveSupport::TestCase
    test "the truth" do
      assert true
-     tm=TournamentModel.new(create_players,3)
-     tm.schedule1
+     tm=TournamentModel.new
+     puts tm.schedule1(create_players,3)
    end
    def create_players
         rishabh=PlayerModel.new("Rishabh Sinha",5)
@@ -13,6 +13,12 @@ class ScheduleTest < ActiveSupport::TestCase
         anway=PlayerModel.new("Anway",4)
         anirudh=PlayerModel.new("Anirudh",5)
         rohan1=PlayerModel.new("Rohan1",2)
-        [rishabh,rohan,manya,anway,anirudh,rohan1]
+        p1=PlayerModel.new("p1",3)
+        p2=PlayerModel.new("p2",3)
+        p3=PlayerModel.new("p3",3)
+        p4=PlayerModel.new("p4",3)
+        p5=PlayerModel.new("p5",3)
+        p6=PlayerModel.new("p6",3)
+        [rishabh,rohan,manya,anway,anirudh,rohan1,p1,p2]
    end
 end
