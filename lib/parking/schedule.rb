@@ -41,9 +41,65 @@ class TournamentModel
     @rounds=rounds
     @matches=[]
   end
- def initialize()
-  end
 
+=begin
+  1)max array size that is performant for array.combination method is 8
+  2)anything over 8 split into 2 groups and schedule seperately and combine
+=end
+  def splitandschedule
+    noofplayers=@players.length
+    if noofplayers > 8
+      splitville(noofplayers,@players,@rounds)
+    else
+     schedule1(@players,@rounds)
+    end
+  end
+  def splitville(noofplayers,players,rounds)
+    puts "hehehehe"
+    result={}
+    case
+     when noofplayers % 10==0
+       result=divideandconquer(10,noofplayers,players,rounds)
+     when noofplayers % 8==0
+            result=divideandconquer(8,noofplayers,players,rounds)
+     when noofplayers % 6==0
+            result=divideandconquer(6,noofplayers,players,rounds)
+     when noofplayers % 14==0
+              parts=noofplayers/14
+              1.upto(parts) do |n|
+                 result1=divideandconquer(8,8,players.slice(0,8),rounds)
+                 result2=divideandconquer(6,6,players.slice(8,6),rounds)
+                 resultn=combinehashes(result1,result2)
+                 result=combinehashes(resultn,result)
+              end
+     else
+         raise "cant handle #{noofplayers} players"
+    end
+    result
+  end
+ def divideandconquer(n,noofplayers,players,rounds)
+   parts=noofplayers/n
+   result={}
+   1.upto(parts) do|n|
+          puts n
+          firstpart=players.slice(0,6)
+          secondpart=players.slice(6,4)
+          h1=schedule1(firstpart,rounds)
+          h2=schedule1(secondpart,rounds)
+          result=combinehashes(h1,h2)
+   end
+  result
+ end
+ def combinehashes(h1,h2)
+    result={}
+    h1.each do |key, array|
+     #p "key=#{key}"
+     #p "array=#{array}"
+     result[key]=array.concat(h2[key])
+     #p "result[key]=#{result[key]}"
+    end
+    result
+  end
   def schedule2
     #arrange players in a hash rating=>[players]
     playershash=arrangeplayers
