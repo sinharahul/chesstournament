@@ -80,13 +80,16 @@ class TournamentModel
  def divideandconquer(n,noofplayers,players,rounds)
    parts=noofplayers/n
    result={}
-   1.upto(parts) do|n|
-          puts n
-          firstpart=players.slice(0,6)
-          secondpart=players.slice(6,4)
-          h1=schedule1(firstpart,rounds)
-          h2=schedule1(secondpart,rounds)
-          result=combinehashes(h1,h2)
+   count=0
+   1.upto(parts) do|partn|
+          puts partn
+          part=players.slice(count,n*partn)
+          #secondpart=players.slice(6,6)
+          #h1=schedule1(firstpart,rounds)
+          h=schedule1(part,rounds)
+          p "h=#{h}"
+          result=combinehashes(h,result)
+          count=count+n
    end
   result
  end
@@ -95,7 +98,12 @@ class TournamentModel
     h1.each do |key, array|
      #p "key=#{key}"
      #p "array=#{array}"
-     result[key]=array.concat(h2[key])
+     if h2[key] != nil
+        #result[key]=array.concat(h2[key])
+        result[key]=h2[key].concat(array)
+     else
+        result[key]=array
+     end
      #p "result[key]=#{result[key]}"
     end
     result

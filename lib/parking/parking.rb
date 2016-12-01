@@ -58,7 +58,7 @@ class Parking
       playermodels << pm
     end
     tm=TournamentModel.new(playermodels,rounds)
-    matches=tm.schedule1
+    matches=tm.splitandschedule
     puts "First round Matches=#{matches[1]}"
     puts "Second round Matches=#{matches[2]}"
     puts "Third round Matches=#{matches[3]}"
