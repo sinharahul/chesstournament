@@ -26,6 +26,17 @@ class Parking
          end
          playerArray << p
       end
+       if playerArray.length % 2 != 0
+            dp=Player.find_by(name:"Bye...")
+            if dp==nil
+              dp=Player.new
+              dp.name ="Bye..."
+              dp.rating=2
+              dp.save
+            end
+
+             playerArray  << dp
+       end
       matches=convert(playerArray,rounds)
       save(matches,tournament)
       return playerArray

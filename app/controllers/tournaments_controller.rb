@@ -19,7 +19,7 @@ class TournamentsController < ApplicationController
   # GET /tournaments/new
   def new
     @tournament = Tournament.new
-    @players=Player.all
+    @players=Player.where("name != ?","Bye...")
   end
 
   # GET /tournaments/1/edit
@@ -32,6 +32,7 @@ class TournamentsController < ApplicationController
     puts "In create #{params[:players]}"
     puts "In create #{params[:no_of_rounds]}"
     @players=params[:players]
+
     @rounds=params[:tournament][:no_of_rounds].to_i
     puts @players.length
     puts "rounds=#{@rounds}"
