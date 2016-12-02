@@ -20,7 +20,7 @@ $( document ).on('turbolinks:load', function() {
           playerIndex=playerIndex+1;
         });
         $( "#removeplayer1" ).click(function() {
-           #alert( "Handler for .click() called." +idv);
+           //alert( "Handler for .click() called." +idv);
            $(idv).parent().remove();
         });
    }
