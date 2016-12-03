@@ -1,5 +1,16 @@
 require 'parking/schedule'
 class Parking
+ def updateMatches(matches)
+  matches.each do |key,array|
+    p "match key=#{key} value=#{array[:result]}"
+    mm=Match.find_by id:key
+    r=array[:result]
+    if r != nil
+      mm.result=r
+      mm.save
+    end
+  end
+ end
  def process1(players,rounds,tournament)
       playerArray=[]
       puts players.length

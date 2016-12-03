@@ -1,6 +1,48 @@
-<h1>Editing Tournament</h1>
+<h1>Editing :Enter Results</h1>
+<%= form_for(@tournament) do |f| %>
+<p id="notice"><%= notice %></p>
 
-<%= render 'form', tournament: @tournament %>
+<p>
+  <strong>Name:</strong>
+  <%= @tournament.name %>
+</p>
 
-<%= link_to 'Show', @tournament %> |
+<p>
+  <strong>Rounds:</strong>
+  <%= @tournament.no_of_rounds %>
+</p>
+
+<%= link_to 'Edit', edit_tournament_path(@tournament) %> |
 <%= link_to 'Back', tournaments_path %>
+
+ <% @tournament.rounds.each do |round| %>
+ <table class="table-striped table">
+   <thead>
+     <tr>
+       <th>Round:<%=round.round_number %></th>
+       <th>Result</th>
+     </tr>
+   </thead>
+  <tbody>
+
+    <% round.matches.each do |match|%>
+
+         <%= fields_for "matches[]", match do |m| %>
+          <tr>
+                   <td><%= match.players[0].name  %> Vs  <%= match.players[1].name%> </td>
+                  <td><%= m.text_field :result %></td>
+          </tr>
+         <% end %>
+
+    <%end%>
+
+  </tbody>
+
+ <% end %>
+</table>
+
+<div class="actions">
+  <%= f.submit %>
+
+</div>
+<% end %>

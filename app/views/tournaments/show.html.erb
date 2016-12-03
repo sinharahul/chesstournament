@@ -17,7 +17,8 @@
  <table class="table-striped table">
    <thead>
      <tr>
-       <th>Round:<%=round.round_number %></th>
+       <th >Round:<%=round.round_number %></th>
+
      </tr>
    </thead>
   <tbody>
@@ -28,6 +29,7 @@
         <td><bold>V</bold></td>
           <td><%= players[1].name %>(<%=players[1].rating %>)</td>
 
+        <td><%= getResult(match.result) %></td>
       </tr>
     <%end%>
   </tbody>

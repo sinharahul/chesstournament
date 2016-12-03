@@ -13,7 +13,6 @@ class TournamentsController < ApplicationController
   def show
     @tour = Tournament.find(params[:id])
     @rounds=@tour.rounds
-
   end
 
   # GET /tournaments/new
@@ -24,6 +23,9 @@ class TournamentsController < ApplicationController
 
   # GET /tournaments/1/edit
   def edit
+
+    @tournament = Tournament.find(params[:id])
+    @players=Player.where("name != ?","Bye...")
   end
 
   # POST /tournaments
@@ -55,8 +57,12 @@ class TournamentsController < ApplicationController
   # PATCH/PUT /tournaments/1
   # PATCH/PUT /tournaments/1.json
   def update
+    matches=params[:matches]
+    p "matches=#{matches}"
+    parking=Parking.new
+    parking.updateMatches(matches)
     respond_to do |format|
-      if @tournament.update(tournament_params)
+      if @tournament.update(update_params)
         format.html { redirect_to @tournament, notice: 'Tournament was successfully updated.' }
         format.json { render :show, status: :ok, location: @tournament }
       else
@@ -81,7 +87,9 @@ class TournamentsController < ApplicationController
     def set_tournament
       @tournament = Tournament.find(params[:id])
     end
-
+    def update_params
+      params.require(:matches).permit(:id, :result,:matches)
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def tournament_params
       params.require(:tournament).permit(:name, :no_of_rounds,:players)
