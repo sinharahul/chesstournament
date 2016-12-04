@@ -1,11 +1,22 @@
 require 'test_helper'
 require 'parking/schedule'
 class ScheduleTest < ActiveSupport::TestCase
+=begin
    test "the truth" do
      assert true
      tm=TournamentModel.new(create_players,1)
      puts "Master schedule=#{tm.splitandschedule}"
    end
+=end
+    test "create 7 player tournament" do
+        assert true
+        p=create_players.slice(0,7)
+        p "p=#{p} length=#{p.length}"
+
+        tm=TournamentModel.new(p,3)
+        h=tm.splitandschedule
+        puts "Master schedule=#{h}"
+      end
    def create_players
         rishabh=PlayerModel.new("Rishabh Sinha",5)
         rohan=PlayerModel.new("Rohan",5)

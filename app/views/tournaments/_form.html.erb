@@ -20,7 +20,7 @@
     <%= f.label :no_of_rounds %>
     <%= f.number_field :no_of_rounds %>
   </div>
-  <h4>Players List</h1>
+  <h4>Players List(Number of players:<%=@players.length%>)</h1>
  <%= link_to 'New Player', new_player_path %>
 <table id="playertable",class="table-striped table">
   <tr>

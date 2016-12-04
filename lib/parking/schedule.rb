@@ -167,6 +167,7 @@ class TournamentModel
   3)filter out all groupings that contain the same player more than once
 =end
   def schedule1(players,rounds)
+
       rmmatches={}
       matches=getmatches(players)
 
