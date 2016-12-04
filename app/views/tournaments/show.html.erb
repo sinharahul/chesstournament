@@ -9,7 +9,7 @@
   <strong>Rounds:</strong>
   <%= @tournament.no_of_rounds %>
 </p>
-
+<% matcharray=[] %>
 <%= link_to 'Edit', edit_tournament_path(@tournament) %> |
 <%= link_to 'Back', tournaments_path %>
 
@@ -23,6 +23,7 @@
    </thead>
   <tbody>
     <% round.matches.each do |match|%>
+    <% matcharray << match %>
     <%  players=match.players   %>
       <tr>
         <td><%= players[0].name %>(<%=players[0].rating %>)</td>
@@ -35,3 +36,25 @@
   </tbody>
  <% end %>
 </table>
+<% r=ranking(matcharray) %>
+<% if r != nil %>
+<table class="table-striped table">
+   <thead>
+     <tr>
+       <th >Tournament Results</th>
+     </tr>
+   </thead>
+  <tbody>
+  <%count=0%>
+   <%r.each do |key,value|%>
+    <tr>
+      <%if count <= 2%>
+        <td class="success"><%=key%> : <%=value%> </td>
+      <%else%>
+        <td><%=key%> : <%=value%> </td>
+      <% end %>
+    </tr>
+    <%count=count+1%>
+   <%end%>
+  </tbody>
+<%end%>
