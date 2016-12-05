@@ -2,11 +2,13 @@ require 'test_helper'
 
 class TournamentsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    sign_in User.create(:email => "#{rand(50000)}@example.com",:password=>"password1234")
     @tournament = tournaments(:one)
+
   end
 
   test "should get index" do
-    get tournaments_url
+     get tournaments_url
     assert_response :success
   end
 

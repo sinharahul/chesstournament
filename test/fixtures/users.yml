@@ -6,4 +6,11 @@
 one:
   email: email1@hotmail.com
 
-
+user1:
+ id: 1
+ email: email2@hotmail.com
+ #password: password1234
+ encrypted_password: abcdef1
+ #password_salt:  efvfvffdv
+ #confirmed_at: <%= Time.now %>
+ created_at: <%= Time.now %>
