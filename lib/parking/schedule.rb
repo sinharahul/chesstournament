@@ -212,7 +212,7 @@ class TournamentModel
     matches.each do |m|
       sum=sum+(m.player1.rating-m.player2.rating).abs
     end
-     p "Sum=#{sum}"
+     #p "Sum=#{sum}"
     sum
   end
   def uniquematches(allcombinations)
