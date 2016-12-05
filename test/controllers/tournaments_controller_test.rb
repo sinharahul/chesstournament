@@ -4,8 +4,7 @@ class TournamentsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in User.create(:email => "#{rand(50000)}@example.com",:password=>"password1234")
     @tournament = tournaments(:one)
-
-  end
+    end
 
   test "should get index" do
      get tournaments_url
@@ -19,7 +18,10 @@ class TournamentsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create tournament" do
     assert_difference('Tournament.count') do
-      post tournaments_url, params: { tournament: { name: @tournament.name, rounds: @tournament.rounds } }
+      post tournaments_url, params: { tournament: { name: @tournament.name, rounds: @tournament.rounds },
+                                     matches: {"1": {name:"m1",result:"1"},"2": {name:"m1",result:"1"}},
+                                     players: {"1":{name:"player1",rating:"1"},"2":{name:"player2",rating:"1"}    }
+                                    }
     end
 
     assert_redirected_to tournament_url(Tournament.last)
@@ -36,7 +38,9 @@ class TournamentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update tournament" do
-    patch tournament_url(@tournament), params: { tournament: { name: @tournament.name, rounds: @tournament.rounds } }
+    patch tournament_url(@tournament), params: { tournament: { name: @tournament.name, rounds: @tournament.rounds } ,
+                                                 matches: {"1": {name:"m1",result:"1"},"2": {name:"m1",result:"1"}}
+                                             }
     assert_redirected_to tournament_url(@tournament)
   end
 
