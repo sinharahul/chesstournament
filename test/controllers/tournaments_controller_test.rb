@@ -19,7 +19,7 @@ class TournamentsControllerTest < ActionDispatch::IntegrationTest
   test "should create one round for 2 players" do
     assert_difference('Tournament.count') do
       post tournaments_url, params: { tournament: { name: @tournament.name, rounds: @tournament.rounds },
-                                     matches: {"1": {name:"m1",result:"1"},"2": {name:"m1",result:"1"}},
+
                                      players: {"1":{name:"player1",rating:"1"},"2":{name:"player2",rating:"1"}    }
                                     }
     end
