@@ -26,6 +26,7 @@ class TournamentsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to tournament_url(Tournament.last)
     p tournament_url(Tournament.last)
+    #Magic sauce ,do a get and then read elements of page
     get tournament_url(Tournament.last)
     assert_select "title","Livingston Chess Club"
     assert_select "table",:count => 2
