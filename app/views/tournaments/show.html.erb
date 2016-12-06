@@ -14,7 +14,7 @@
 <%= link_to 'Back', tournaments_path %>
 
  <% @tour.rounds.each do |round| %>
- <table class="table-striped table">
+ <table id="matchTable" class="table-striped table">
    <thead>
      <tr>
        <th >Round:<%=round.round_number %></th>

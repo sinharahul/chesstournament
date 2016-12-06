@@ -179,8 +179,12 @@ class TournamentModel
      matches=uniquematches(allcombinations)
      p matches.length
       matches=matches.sort_by!{|m| (rank(m))}
+       p "sorted mathes=#{matches}"
       matches=getunique(matches)
-     matches=matches.slice(0,rounds)
+      p "unique mathes=#{matches}"
+     slice= (rounds > matches.length) ? rounds : matches.length
+     matches=matches.slice(0,slice)
+     p "sliced mathes=#{matches}"
      count=1
      matches.each do|m|
        rmmatches[count]=m

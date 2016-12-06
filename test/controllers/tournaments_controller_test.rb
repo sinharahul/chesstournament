@@ -16,7 +16,7 @@ class TournamentsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should create tournament" do
+  test "should create one round for 2 players" do
     assert_difference('Tournament.count') do
       post tournaments_url, params: { tournament: { name: @tournament.name, rounds: @tournament.rounds },
                                      matches: {"1": {name:"m1",result:"1"},"2": {name:"m1",result:"1"}},
@@ -25,6 +25,11 @@ class TournamentsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to tournament_url(Tournament.last)
+    p tournament_url(Tournament.last)
+    get tournament_url(Tournament.last)
+    assert_select "title","Livingston Chess Club"
+    assert_select "table",:count => 2
+    assert_select "#matchTable tbody tr",:count => 1
   end
 
   test "should show tournament" do
