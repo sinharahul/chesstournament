@@ -11,18 +11,29 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
+  <div class="row">
+      <div class="col-lg-6 col-sm-6 col-md-6">
+      <%= f.label :name %>
+      </div>
+      <div class="col-lg-6 col-sm-6 col-md-6">
+       <%= f.text_field :name %>
+      </div>
+   </div>
+   <p/>
+ <div class="row">
+      <div class="col-lg-6 col-sm-6 col-md-4">
+      <%= f.label :no_of_rounds %>
+      </div>
+      <div class="col-lg-6 col-sm-6 col-md-4">
+       <%= f.number_field :no_of_rounds %>
+      </div>
+   </div>
 
-  <div class="field">
-    <%= f.label :no_of_rounds %>
-    <%= f.number_field :no_of_rounds %>
-  </div>
+
   <h4>Players List(Number of players:<%=@players.length%>)</h1>
  <%= link_to 'New Player', new_player_path %>
-<table id="playertable",class="table-striped table">
+
+<table id="playertable" class="table-striped table">
   <tr>
     <th>Player</th>
     <th>Rating</th>

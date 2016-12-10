@@ -12,15 +12,22 @@
 <% matcharray=[] %>
 <%= link_to 'Edit', edit_tournament_path(@tournament) %> |
 <%= link_to 'Back', tournaments_path %>
-
- <% @tour.rounds.each do |round| %>
- <table id="matchTable" class="table-striped table">
+<table id="matchTable" class="table-striped table">
    <thead>
      <tr>
-       <th >Round:<%=round.round_number %></th>
-
+       <th >Rounds:</th>
+        <th/>
+        <th/>
+        <th/>
      </tr>
    </thead>
+ <% @tour.rounds.each do |round| %>
+     <tr class="roundheader" style="background-color: lightgreen;">
+       <td >Round:<%=round.round_number %></td>
+        <td/>
+        <td/>
+        <td/>
+     </tr>
   <tbody>
     <% round.matches.each do |match|%>
     <% matcharray << match %>
@@ -34,8 +41,9 @@
       </tr>
     <%end%>
   </tbody>
+
  <% end %>
-</table>
+  </table>
 <% r=ranking(matcharray) %>
 <% if r != nil %>
 <table class="table-striped table">
