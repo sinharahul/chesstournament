@@ -17,14 +17,14 @@ class Parking
       players.each do |key, array|
         puts "key=#{key}-----"
         puts array[:name],array[:rating]
-        p=Player.find_by(id:key)
+        p=Player.find_by(name:array[:name])
         #byebug
-        if p==nil && p.name != "Bye..."
+        if p==nil || p.name != "Bye..."
           puts "Creating new player"
           p=Player.new
           p.name=array[:name]
           p.rating=array[:rating]
-          p.id=key
+          #p.id=key
           puts "Creating new player #{p.name} #{p.rating}"
           p.save
         else
