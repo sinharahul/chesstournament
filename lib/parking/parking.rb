@@ -39,6 +39,7 @@ class Parking
       end
        if playerArray.length % 2 != 0
             dp=Player.find_by(name:"Bye...")
+            puts "dp=#{dp}"
             if dp==nil
               dp=Player.new
               dp.name ="Bye..."
