@@ -7,10 +7,10 @@ $( document ).on('turbolinks:load', function() {
         var playerIndex=parseInt(num);
         console.log("playerIndex="+playerIndex);
         var idv=""
-        $('#playertable tr td').click(function() {
-           // $(this).remove();
-            $(this).class='delete';
-            idv=$(this);
+        $('.btn-default').click(function() {
+         // alert( "Handler for .click() called." );
+            $(this).parent().parent().remove();
+
         });
         $( "#addplayer1" ).click(function() {
           //alert( "Handler for .click() called." );
@@ -19,9 +19,6 @@ $( document ).on('turbolinks:load', function() {
           $('#playertable tr:last').after('<tr>'+input1+input2+'</tr>');
           playerIndex=playerIndex+1;
         });
-        $( "#removeplayer1" ).click(function() {
-           //alert( "Handler for .click() called." +idv);
-           $(idv).parent().remove();
-        });
+
    }
 })

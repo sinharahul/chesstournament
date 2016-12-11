@@ -43,7 +43,14 @@
   <% @players.each do |player| %>
     <tr>
        <%= fields_for "players[]", player do |pf| %>
-          <td><%= pf.text_field :name %></td>
+
+
+          <td>
+               <button type="button" class="btn btn-default btn-sm">
+                  <span class="glyphicon glyphicon-remove"></span>
+               </button>
+            <%= pf.text_field :name %>
+           </td>
          <td><%= pf.text_field :rating %></td>
        <% end %>
     </tr>
@@ -55,9 +62,6 @@
        content_tag(:normal, 'Add Player')
      end
     %>
-    <%= button_tag(id:'removeplayer1',type: 'button') do
-           content_tag(:normal, 'Remove Player')
-         end
-        %>
+
   </div>
 <% end %>
