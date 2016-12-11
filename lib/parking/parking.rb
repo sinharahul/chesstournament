@@ -17,9 +17,9 @@ class Parking
       players.each do |key, array|
         puts "key=#{key}-----"
         puts array[:name],array[:rating]
-        p=Player.find_by(name:array[:name])
+        p=Player.find_by(id:key)
         #byebug
-        if p==nil || p.name != "Bye..."
+        if p==nil
           puts "Creating new player"
           p=Player.new
           p.name=array[:name]
