@@ -1,4 +1,9 @@
-<p id="notice"><%= notice %></p>
+<div class="center jumbotron">
+  <h1>Tournament:<%=@tournament.name%></h1>
+
+  <p id="notice"><%= notice %></p>
+</div>
+
 
 <p>
   <strong>Name:</strong>
@@ -22,7 +27,7 @@
      </tr>
    </thead>
  <% @tour.rounds.each do |round| %>
-     <tr class="roundheader" style="background-color: lightgreen;">
+     <tr class="roundheader" style="background-color: Bisque;">
        <td >Round:<%=round.round_number %></td>
         <td/>
         <td/>
