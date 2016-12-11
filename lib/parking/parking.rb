@@ -19,7 +19,7 @@ class Parking
         puts array[:name],array[:rating]
         p=Player.find_by(id:key)
         #byebug
-        if p==nil
+        if p==nil && p.name != "Bye..."
           puts "Creating new player"
           p=Player.new
           p.name=array[:name]

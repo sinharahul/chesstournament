@@ -39,7 +39,14 @@
          <%= fields_for "matches[]", match do |m| %>
           <tr>
                    <td><%= match.players[0].name  %> Vs  <%= match.players[1].name%> </td>
-                  <td><%= m.text_field :result %></td>
+                  <td>
+                    <%= m.select :result ,[   ['Not Played','0'],
+                                             ['White wins','1'],
+                                            ['Black wins','2'],
+                                            ['Draw','3'],
+                                          ]
+                    %>
+                  </td>
           </tr>
          <% end %>
 
