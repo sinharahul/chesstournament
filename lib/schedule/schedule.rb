@@ -1,5 +1,5 @@
-require 'parking/schedule'
-class Parking
+require 'schedule/schedulemodel'
+class Scheduler
  def updateMatches(matches)
   matches.each do |key,array|
     p "match key=#{key} value=#{array[:result]}"

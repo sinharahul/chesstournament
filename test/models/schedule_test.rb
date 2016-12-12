@@ -1,5 +1,5 @@
 require 'test_helper'
-require 'parking/schedule'
+require 'schedule/schedule'
 class ScheduleTest < ActiveSupport::TestCase
 =begin
    test "the truth" do

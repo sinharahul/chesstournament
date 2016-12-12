@@ -182,7 +182,7 @@ class TournamentModel
        p "sorted mathes=#{matches}"
       matches=getunique(matches)
       p "unique mathes=#{matches}"
-     slice= (rounds > matches.length) ? rounds : matches.length
+     slice= (rounds > matches.length) ? matches.length : rounds
      matches=matches.slice(0,slice)
      p "sliced mathes=#{matches}"
      count=1

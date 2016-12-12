@@ -1,4 +1,4 @@
-require 'parking/parking'
+require 'schedule/schedule'
 class TournamentsController < ApplicationController
   before_action :set_tournament, only: [:show, :edit, :update, :destroy]
 
@@ -31,16 +31,17 @@ class TournamentsController < ApplicationController
   # POST /tournaments
   # POST /tournaments.json
   def create
-    puts "In create #{params[:players]}"
-    puts "In create #{params[:no_of_rounds]}"
+    puts "In create :params= #{params}"
+    puts "In create :players= #{params[:players]}"
+    puts "In create :no_of_rounds =#{params[:no_of_rounds]}"
     @players=params[:players]
 
     @rounds=params[:tournament][:no_of_rounds].to_i
     puts @players.length
     puts "rounds=#{@rounds}"
     @tournament = Tournament.new(tournament_params)
-    parking=Parking.new
-    parking.process1(@players,@rounds,@tournament)
+    scheduler=Scheduler.new
+    scheduler.process1(@players,@rounds,@tournament)
 
     puts "#{params}"
     respond_to do |format|
@@ -59,8 +60,8 @@ class TournamentsController < ApplicationController
   def update
     matches=params[:matches]
     p "matches=#{matches}"
-    parking=Parking.new
-    parking.updateMatches(matches)
+    scheduler=Scheduler.new
+    scheduler.updateMatches(matches)
     respond_to do |format|
       if @tournament.update(update_params)
         format.html { redirect_to @tournament, notice: 'Tournament was successfully updated.' }
