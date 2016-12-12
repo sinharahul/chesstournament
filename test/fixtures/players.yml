@@ -9,3 +9,10 @@ player2:
   id: 2
   name: Player2
   rating: 1
+
+<% for i in 1..100 %>
+player_<%=i+2%>:
+  id: <%= i+2 %>
+  name: player<%= i %>
+  rating: <%=[1,2,3,4,5].shuffle[0]%>
+<% end %>
