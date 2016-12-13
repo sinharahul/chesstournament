@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'static_pages/help'
+
   resources :tournaments
   devise_for :users
   resources :players
