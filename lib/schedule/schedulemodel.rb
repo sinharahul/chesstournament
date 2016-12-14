@@ -114,7 +114,7 @@ class TournamentModel
     p "playershash=#{playershash.sort.to_h}"
     sortedhash=playershash.sort.to_h
     matches=[]
-    iter=100000
+    iter=10000
     n=@players.length/2
     #1.upto(@rounds) do |round|
     while matches.length < n*@rounds do

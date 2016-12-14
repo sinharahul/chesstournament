@@ -10,6 +10,7 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
     get static_pages_help_url
     assert_response :success
     assert_select "h1","Sanskriti Livingston Chess Club"
+
   end
 
 end

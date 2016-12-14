@@ -18,3 +18,9 @@ Running tests
 1)Run ALL TESTS :We can run all of our tests at once by using the bin/rails test command.
 2)run specific tests  bin/rails test test/models/article_test.rb -n test_the_truth
 bin/rails test test/controllers/tournaments_controller_test.rb
+
+To run guard
+
+bundle exec guard
+
+bundle exec rspec

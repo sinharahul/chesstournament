@@ -41,7 +41,7 @@ class TournamentsController < ApplicationController
     puts "rounds=#{@rounds}"
     @tournament = Tournament.new(tournament_params)
     scheduler=Scheduler.new
-    scheduler.process1(@players,@rounds,@tournament)
+    scheduler.schedule_players(@players,@rounds,@tournament)
 
     puts "#{params}"
     respond_to do |format|

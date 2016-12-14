@@ -11,7 +11,7 @@ class Scheduler
     end
   end
  end
- def process1(players,rounds,tournament)
+ def schedule_players(players,rounds,tournament)
       playerArray=[]
       puts players.length
       players.each do |key, array|
@@ -64,7 +64,7 @@ class Scheduler
     round=Round.new({round_number:round})
     round.tournament=tournament
 
-   marray.each do|match|
+  marray.each do|match|
      player1=Player.find_by name:match.player1.name
      player2=Player.find_by name:match.player2.name
      match=Match.new
@@ -84,7 +84,7 @@ class Scheduler
     matches=tm.splitandschedule
     puts "First round Matches=#{matches[1]}"
     puts "Second round Matches=#{matches[2]}"
-    puts "Third round Matches=#{matches[3]}"
     matches
  end
+
 end

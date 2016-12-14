@@ -1,9 +1,7 @@
 require 'test_helper'
 
 class TournamentTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+
   def setup
       @t=Tournament.new({name:"Tournament1",no_of_rounds:3})
       @t.save
