@@ -29,6 +29,10 @@ guard :minitest, spring: "bin/rails test", all_on_start: false do
     ["test/controllers/#{matches[1]}_controller_test.rb"] +
     integration_tests(matches[1])
   end
+
+  watch(%r{^lib/schedule/(.*).rb$}) do |matches|
+      'test/controllers/tournaments_controller_test.rb'
+  end
   watch(%r{^app/helpers/(.*?)_helper\.rb$}) do |matches|
     integration_tests(matches[1])
   end
@@ -42,8 +46,8 @@ guard :minitest, spring: "bin/rails test", all_on_start: false do
     ['test/controllers/sessions_controller_test.rb',
      'test/integration/users_login_test.rb']
   end
-  watch('app/controllers/account_activations_controller.rb') do
-    'test/integration/users_signup_test.rb'
+  watch('app/controllers/tournaments_controller.rb') do
+    'test/controllers/tournaments_controller_test.rb'
   end
   watch(%r{app/views/users/*}) do
     resource_tests('users') +
