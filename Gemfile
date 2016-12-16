@@ -40,7 +40,8 @@ group :test,:development  do
   gem 'guard-minitest',           '2.4.4'
   gem 'growl'
   gem 'rspec-rails', '~> 3.4'
-
+  #Konacha...
+   gem 'jasmine-rails'
 end
 
 group :development do
