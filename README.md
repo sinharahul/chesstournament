@@ -13,6 +13,7 @@ heroku pg:psql
 
 TODOS
 1)Add tests
+2)Merge refactor pending
 
 Running tests
 1)Run ALL TESTS :We can run all of our tests at once by using the bin/rails test command.
