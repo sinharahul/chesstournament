@@ -1,5 +1,8 @@
 
 $( document ).on('turbolinks:load', function() {
+    /**$('.carousel').carousel({
+      interval: 3000
+    });**/
    var name=$( "table tr:last-child td input" ).attr("name");
    var playerIndex=0;
    if(name){
