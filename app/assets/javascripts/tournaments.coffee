@@ -16,10 +16,14 @@ $(document).on 'turbolinks:load', ->
   $('#addplayer1').click ->
     #alert( "Handler for .click() called." )
     deletebutton = ' <button type="button" class="btn btn-default btn-sm">' + '<span class="glyphicon glyphicon-remove"></span>' + '</button> '
-    input1 = deletebutton + '<td><input type="text"  name="players[' + playerIndex + 1 + '][name]" id="players_' + playerIndex + 1 + '_name"></td>'
+    input1 =   '<td>'+deletebutton+'<input type="text"  name="players[' + playerIndex + 1 + '][name]" id="players_' + playerIndex + 1 + '_name"></td>'
     input2 = '<td><input type="text"  name="players[' + playerIndex + 1 + '][rating]" id="players_' + playerIndex + 1 + '_rating"></td>'
     $('#playertable tr:last').after '<tr>' + input1 + input2 + '</tr>'
     playerIndex = playerIndex + 1
+    nov=$('#playerslength').text()
+    noi=parseInt(nov)
+    noi=noi+1
+    $('#playerslength').text("#{noi}")
     return
   return
 

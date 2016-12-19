@@ -19,18 +19,18 @@
        <%= f.text_field :name %>
       </div>
    </div>
-   <p/>
+  <p/>
  <div class="row">
-      <div class="col-lg-6 col-sm-6 col-md-4">
+      <div class="col-lg-6 col-sm-6 col-md-6">
       <%= f.label :no_of_rounds %>
       </div>
-      <div class="col-lg-6 col-sm-6 col-md-4">
+      <div class="col-lg-6 col-sm-6 col-md-6">
        <%= f.number_field :no_of_rounds %>
       </div>
    </div>
 
 
-  <h4>Players List(Number of players:<%=@players.length%>)</h1>
+  <h4>Players List(Number of players:<label id="playerslength"><%=@players.length%></label>)</h1>
  <%= link_to 'New Player', new_player_path %>
 
 <table id="playertable" class="table-striped table">
