@@ -49,7 +49,7 @@
                <button type="button" class="btn btn-default btn-sm">
                   <span class="glyphicon glyphicon-remove"></span>
                </button>
-            <%= pf.text_field :name %>
+            <%= pf.text_field :name ,:required => true%>
            </td>
          <td><%= pf.text_field :rating %></td>
        <% end %>
@@ -57,7 +57,7 @@
   <% end %>
 </table>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :id => 'submitbutton' %>
     <%= button_tag(id:'addplayer1',name:'addplayer',type: 'button') do
        content_tag(:normal, 'Add Player')
      end
