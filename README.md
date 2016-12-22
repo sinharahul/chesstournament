@@ -25,3 +25,13 @@ To run guard
 bundle exec guard
 
 bundle exec rspec
+
+Javascript frameworks
+Anhular
+1)Update bowerfile
+2)bundle exec rake bower:install
+
+React
+https://www.safaribooksonline.com/library/view/hands-on-with-react/9781771375061/part05.html
+1)Add gem 'react-rails' to Gemfile
+2)rails g react:install
